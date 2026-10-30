@@ -4,6 +4,22 @@ session_start();
 
 $name = $_SESSION['customer_name'] ?? null;
 $email = $_SESSION['customer_email'] ?? null;
+$additionalData = $_SESSION['customer_additional'] ?? [];
+
+unset($_SESSION['customer_additional']);
+
+$additionalLabels = [
+    'phone' => 'Nomor HP',
+    'nik' => 'NIK',
+    'address' => 'Alamat',
+    'province' => 'Provinsi',
+    'city' => 'Kota',
+    'regency' => 'Kabupaten',
+    'postal_code' => 'Kode POS',
+    'birth_place' => 'Tempat Lahir',
+    'birth_date' => 'Tanggal Lahir',
+    'parent_name' => 'Nama Orang Tua',
+];
 
 // Data hanya sementara; hapus setelah ditampilkan satu kali.
 unset($_SESSION['customer_name'], $_SESSION['customer_email']);
@@ -32,6 +48,12 @@ function e(string $value): string
             <p>JavaScript mengizinkan submit dan server juga menerima data yang valid.</p>
             <p><strong>Nama:</strong> <?= e((string) $name) ?></p>
             <p><strong>Email:</strong> <?= e((string) $email) ?></p>
+            <?php foreach ($additionalLabels as $field => $label): ?>
+            <p>
+                <strong><?= e($label) ?>:</strong>
+                <?= e((string) ($additionalData[$field] ?? '')) ?>
+            </p>
+        <?php endforeach; ?>
             <p class="muted">Data ini disimpan sementara di session, bukan database.</p>
         <?php else: ?>
             <p>Belum ada data customer dari pengiriman terbaru.</p>

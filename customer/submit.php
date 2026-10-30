@@ -19,6 +19,30 @@ $email = trim((string) ($_POST['email'] ?? ''));
 // Validasi server tetap wajib walaupun sudah ada JavaScript di browser.
 $errors = [];
 
+$additionalFields = [
+    'phone' => 'Nomor HP',
+    'nik' => 'NIK',
+    'address' => 'Alamat',
+    'province' => 'Provinsi',
+    'city' => 'Kota',
+    'regency' => 'Kabupaten',
+    'postal_code' => 'Kode POS',
+    'birth_place' => 'Tempat Lahir',
+    'birth_date' => 'Tanggal Lahir',
+    'parent_name' => 'Nama Orang Tua',
+];
+
+$additionalData = [];
+
+foreach ($additionalFields as $field => $label) {
+    $value = $_POST[$field] ?? '';
+    $additionalData[$field] = is_string($value) ? trim($value) : '';
+
+    if ($additionalData[$field] === '') {
+        $errors[] = $label . ' wajib diisi.';
+    }
+}
+
 if ($name === '') {
     $errors[] = 'Nama customer wajib diisi.';
 }
@@ -61,10 +85,12 @@ if ($errors !== []) {
 
 // Buat object dari class yang sudah dikenal sejak Session 14.
 $customer = new Customer($name, $email);
+$customer->setAdditionalData($additionalData);
 
 // Simpan sementara untuk menunjukkan session lintas-request.
 $_SESSION['customer_name'] = $customer->getName();
 $_SESSION['customer_email'] = $customer->getEmail();
+$_SESSION['customer_additional'] = $customer->getAdditionalData();
 
 session_write_close();
 

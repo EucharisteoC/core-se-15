@@ -15,6 +15,19 @@
         public function getEmail(){
             return $this->email;
         }
+
+        private array $additionalData = [];
+
+        public function setAdditionalData(array $data): void
+        {
+            $this->additionalData = $data;
+        }
+
+        public function getAdditionalData(): array
+        {
+            return $this->additionalData;
+        }
+
     }
 
 ?>

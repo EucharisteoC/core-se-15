@@ -81,3 +81,36 @@ customerForm.addEventListener("submit", function(event){
     }
 
 });
+
+const additionalInputs = customerForm.querySelectorAll(
+    "#nik, #address, #province, #city, #regency, " +
+    "#postal_code, #birth_place, #birth_date, #parent_name"
+);
+
+customerForm.addEventListener("submit", function (event) {
+    let firstEmptyInput = null;
+
+    additionalInputs.forEach(function (input) {
+        input.setCustomValidity("");
+
+        if (input.value.trim() === "") {
+            input.setCustomValidity("Field ini wajib diisi.");
+
+            if (firstEmptyInput === null) {
+                firstEmptyInput = input;
+            }
+        }
+    });
+
+    if (firstEmptyInput !== null) {
+        event.preventDefault();
+        formMessage.textContent = "Semua data wajib diisi.";
+        firstEmptyInput.reportValidity();
+    }
+});
+
+additionalInputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+        input.setCustomValidity("");
+    });
+});

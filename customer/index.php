@@ -63,6 +63,33 @@
             <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="081234567890" required>
             <p id="phoneFeedback" class="feedback" aria-live="polite"></p>
 
+            <label for="nik">NIK <span class="required">*</span></label>
+            <input type="text" id="nik" name="nik" required>
+
+            <label for="address">Alamat <span class="required">*</span></label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="province">Provinsi <span class="required">*</span></label>
+            <input type="text" id="province" name="province" required>
+
+            <label for="city">Kota <span class="required">*</span></label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="regency">Kabupaten <span class="required">*</span></label>
+            <input type="text" id="regency" name="regency" required>
+
+            <label for="postal_code">Kode POS <span class="required">*</span></label>
+            <input type="text" id="postal_code" name="postal_code" required>
+
+            <label for="birth_place">Tempat Lahir <span class="required">*</span></label>
+            <input type="text" id="birth_place" name="birth_place" required>
+
+            <label for="birth_date">Tanggal Lahir <span class="required">*</span></label>
+            <input type="date" id="birth_date" name="birth_date" required>
+
+            <label for="parent_name">Nama Orang Tua <span class="required">*</span></label>
+            <input type="text" id="parent_name" name="parent_name" required>
+
             <div class="row">
                 <button type="submit" class="primary">Submit Customer</button>
                 <button type="reset" class="secondary">Reset Form</button>
